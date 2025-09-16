@@ -10,6 +10,7 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
+const baseController = require("./controllers/baseController")
 
 /* ***********************
  * View Engine and Templates
@@ -26,7 +27,13 @@ app.use(static)
 app.get("/", function(req, res){
 res.render("index", {title: "Home"})
 })
+app.get("/", baseController.buildHome)
+const utilities = require("./utilities")
 
+app.use(async (req, res, next) => {
+  res.locals.nav = await utilities.getNav()
+  next()
+})
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
