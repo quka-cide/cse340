@@ -33,16 +33,23 @@ nav ul {
   list-style: none;
 }
 
-nav > ul > li {
+nav li {
+  display: flex;
   width: 100%;
-  flex: auto;
+  
+}
+
+nav a {
+  text-align: center;
+  
+  color: white;
+  width: 100%;
   background-color: #0D1B2A;
-  color: #ffffff;
   text-align: center;
   padding: 10px 20px;
 }
 
-nav > ul > li:hover {
+nav a:hover {
   background-color: #415A77;
   transition: .5s;
 }
@@ -123,6 +130,26 @@ nav > ul > li:hover {
   color: blue;
 }
 
+/* Inventory */
+#inv-display {
+  /* display: grid;
+  grid-template-columns: 1fr; */
+  align-items: center;
+  justify-items: center;
+}
+
+#inv-display li {
+  text-align: center;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .1);
+  margin: 10px 0;
+  padding: 10px;
+}
+
 @media screen and (min-width: 1200px) {
   body {
     display: flex;
@@ -160,6 +187,11 @@ nav > ul > li:hover {
     grid-row: 2;
   }
 
-  .invitation {
+  #inv-display {
+    width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
   }
+  
 }
