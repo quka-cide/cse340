@@ -41,20 +41,21 @@ const errorRoute = require("./routes/errorRoute")
 app.use("/error", errorRoute)
 
 // Catch 500 errors
-app.use((err, req, res, next) => {
+app.use(async (err, req, res, next) => {
   console.error(err.stack)
+  const nav = await utilities.getNav()
   res.status(500).render("errors/error", {
     title: "Server Error",
     message: "Oops! Something went wrong on our end. Please try again later.",
-    nav: utilities.getNav()
+    nav
   })
 })
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file
  *************************/
-const port = process.env.PORT
-const host = process.env.HOST
+const port = process.env.PORT || 3000
+const host = process.env.HOST || "0.0.0.0"
 
 /* ***********************
  * Log statement to confirm server operation

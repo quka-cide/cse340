@@ -35,7 +35,7 @@ module.exports = {
     ssl: {
       rejectUnauthorized: false,
     },
-  })
+  });
 
   module.exports = pool
 }
