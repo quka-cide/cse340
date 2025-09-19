@@ -14,6 +14,7 @@ const utilities = require("./utilities")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 
+
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -34,6 +35,20 @@ app.use(static)
 // index route
 app.get("/", baseController.buildHome)
 app.use("/inv", inventoryRoute)
+
+//error route
+const errorRoute = require("./routes/errorRoute")
+app.use("/error", errorRoute)
+
+// Catch 500 errors
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).render("errors/error", {
+    title: "Server Error",
+    message: "Oops! Something went wrong on our end. Please try again later.",
+    nav: utilities.getNav()
+  })
+})
 /* ***********************
  * Local Server Information
  * Values from .env (environment) file

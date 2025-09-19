@@ -130,7 +130,7 @@ nav a:hover {
   color: blue;
 }
 
-/* Inventory */
+/* Inventory page */
 #inv-display {
   /* display: grid;
   grid-template-columns: 1fr; */
@@ -150,6 +150,35 @@ nav a:hover {
   padding: 10px;
 }
 
+/* Details page */
+#details {
+  display: flex;
+  flex-direction: column;
+}
+
+#details img {
+  margin: 10px;
+}
+
+#details ul {
+  list-style: none;
+  margin: 10px 0;
+}
+
+#details li {
+  margin: 10px 5px;
+}
+
+#details li:nth-child(even) {
+  background-color: #f2f2f2;
+  padding: 10px 0;
+}
+
+#details .strong {
+  font-size: 20px;
+  font-weight: 600;
+}
+
 @media screen and (min-width: 1200px) {
   body {
     display: flex;
@@ -160,7 +189,7 @@ nav a:hover {
     height: 100vh;
   }
 
-  main {
+  .wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
@@ -193,5 +222,15 @@ nav a:hover {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   }
+
+  #details {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  #details img {
+  }
+
+
   
 }
