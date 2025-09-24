@@ -14,10 +14,11 @@ a {
 }
 /* Header */
 #top-header {
-  margin-top: 20px;
+  margin: 20px 10px 10px 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 .hero-link {
@@ -58,6 +59,7 @@ nav a:hover {
 .section {
   margin: 20px 0;
 }
+
 .background {
   position: relative;
   display: block;
@@ -179,6 +181,60 @@ nav a:hover {
   font-weight: 600;
 }
 
+/* account page */
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 5px;
+  border: 3px solid #f2f2f2;
+  border-radius: 3px;
+  padding: 10px;
+  background-color: #415A77;
+}
+
+.form label {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.form input {
+  height: 25px;
+  border: none;
+  border-radius: 3px;
+  padding: 0 5px;
+}
+
+.form button {
+  margin-top: 20px;
+  width: 30%;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 0;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.sign_up {
+  font-size: 20px;
+}
+
+.sign_up span {
+  text-decoration: underline;
+}
+
+.pass {
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+input:required:invalid, input:focus:invalid {
+  border-left: 3px solid red;
+}
+ input:required:valid {
+  border-left: 3px solid greenyellow;
+ }
+
 @media screen and (min-width: 1200px) {
   body {
     display: flex;
@@ -227,10 +283,5 @@ nav a:hover {
     flex-direction: row;
     justify-content: flex-start;
   }
-
-  #details img {
-  }
-
-
   
 }

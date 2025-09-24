@@ -1,0 +1,16 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } %>
+
+    <%- messages() %>
+
+<form class="login form">
+    <label for="email">Email:</label>
+    <input type="email" name="account_email" id="email" required>
+    <label for="password">Password:</label>
+    <span class="pass">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 
+    <input type="password" name="account_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required>
+    <button type="submit">login</button>
+</form>
+
+<a class="sign_up" href="/account/register">No account? <span class="under-line">Sign-up</span></a>
