@@ -12,6 +12,10 @@ a {
   text-decoration: none;
   color: black; 
 }
+
+ul {
+  list-style: none;
+}
 /* Header */
 #top-header {
   margin: 20px 10px 10px 10px;

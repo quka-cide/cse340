@@ -13,6 +13,7 @@ const static = require("./routes/static")
 const utilities = require("./utilities")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const errorRoute = require("./routes/errorRoute")
 const session = require("express-session")
 const pool = require('./database/')
 const account = require("./routes/accountRoute")
@@ -63,7 +64,6 @@ app.get("/", baseController.buildHome)
 app.use("/inv", inventoryRoute)
 
 //error route
-const errorRoute = require("./routes/errorRoute")
 app.use("/error", errorRoute)
 
 //account route
@@ -79,6 +79,10 @@ app.use(async (err, req, res, next) => {
     nav
   })
 })
+
+//inventory management 
+
+app.use("/inv", inventoryRoute)
 
 /* ***********************
  * Local Server Information
