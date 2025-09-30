@@ -52,18 +52,20 @@ validate.registationRules = () => {
     ]
 }
 
-validate.loginRules = [
-  body("account_email")
-    .trim()
-    .isEmail()
-    .normalizeEmail()
-    .withMessage("Please provide a valid email."),
+validate.loginRules = () => {
+  return [
+    body("account_email")
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("Please provide a valid email."),
 
-  body("account_password")
-    .trim()
-    .isLength({ min: 12 })
-    .withMessage("Password must be at least 12 characters long.")
-]
+    body("account_password")
+      .trim()
+      .isLength({ min: 12 })
+      .withMessage("Password must be at least 12 characters long.")
+  ]
+}
 
 /* ******************************
  * Check data and return errors or continue to registration

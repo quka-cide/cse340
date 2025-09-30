@@ -27,4 +27,9 @@ router.get("/add-inventory", invController.buildAddInventory)
 // process add-inventory
 router.post("/add-inventory", validate.inventoryRules(), invController.addInventory)
 
+router.get("/getInventory/:classification_id", invController.getInventoryJSON)
+// modify view
+router.get("/edit/:inv_id", invController.editInventoryView)
+router.post("/update/", invController.updateInventory)
+
 module.exports = router;

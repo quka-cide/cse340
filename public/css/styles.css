@@ -239,6 +239,59 @@ input:required:invalid, input:focus:invalid {
   border-left: 3px solid greenyellow;
  }
 
+ .manag-links li {
+  margin: 10px;
+ }
+
+.manag-links a {
+  margin-top: 20px;
+  width: 30%;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 0;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.inv-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  font-family: Arial, sans-serif;
+}
+
+.inv-table th,
+.inv-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.inv-table th {
+  background-color: #333;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inv-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.inv-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.inv-table a {
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.inv-table a:hover {
+  text-decoration: underline;
+}
 @media screen and (min-width: 1200px) {
   body {
     display: flex;
