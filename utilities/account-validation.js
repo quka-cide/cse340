@@ -89,4 +89,48 @@ validate.checkRegData = async (req, res, next) => {
   next()
 }
 
+validate.updateAccountRules = () => {
+  return [
+    body("account_firstname").trim().isLength({ min: 1 }).withMessage("First name required."),
+    body("account_lastname").trim().isLength({ min: 1 }).withMessage("Last name required."),
+    body("account_email")
+      .trim()
+      .isEmail()
+      .withMessage("Valid email required.")
+      .custom(async (email, { req }) => {
+        const existingEmail = await accountModel.getAccountByEmail(email);
+        if (existingEmail && existingEmail.account_id != req.body.account_id) {
+          throw new Error("Email already exists.");
+        }
+      }),
+  ];
+};
+
+validate.passwordRules = () => {
+  return [
+    body("account_password")
+      .isStrongPassword({
+        minLength: 12,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+      .withMessage("Password must be at least 12 chars and contain uppercase, lowercase, number & special character."),
+  ];
+};
+
+validate.checkPasswordData = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.render("account/update", {
+      title: "Update Account",
+      errors: errors.array(),
+      message: null,
+      accountData: req.body,
+    });
+  }
+  next();
+}
+
 module.exports = validate

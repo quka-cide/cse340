@@ -45,6 +45,13 @@ app.use(function(req, res, next){
 
 app.use(cookieParser())
 
+// Make loggedin + accountData available in all views
+app.use((req, res, next) => {
+  res.locals.loggedin = req.session.loggedin || false
+  res.locals.accountData = req.session.accountData || null
+  next()
+})
+
 app.use(utilities.checkJWTToken)
 /* ***********************
  * View Engine and Templates
@@ -86,7 +93,6 @@ app.use(async (err, req, res, next) => {
 })
 
 //inventory management 
-
 app.use("/inv", inventoryRoute)
 
 /* ***********************

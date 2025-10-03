@@ -40,7 +40,6 @@ async function buildManagement(req, res, next) {
     })
 }
 
-
 /* ****************************************
 *  Process Registration
 * *************************************** */
@@ -128,4 +127,69 @@ async function accountLogin(req, res) {
   }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement }
+/* ***************************
+ *  Build Update Account form
+ * ************************** */
+async function buildUpdateAccount(req, res, next) {
+  const account_id = req.params.account_id
+  const accountData = await accountModel.getAccountById(account_id)
+  res.render("account/update", {
+    title: "Update Account Information",
+    accountData
+  })
+}
+
+/* ***************************
+ *  Process Update Account
+ * ************************** */
+async function updateAccount(req, res, next) {
+  const {account_id, account_firstname, account_lastname, account_email } = req.body
+  const updateResult = accountModel.updateAccount(account_id, account_firstname, account_lastname, account_email)
+  if(updateResult) {
+    req.flash("notice", "Account updated successfully.")
+    return res.redirect("/account/")
+  } else {
+    req.flash("notice", "Update failed. Try again.")
+    return res.redirect("/account/update/" + account_id)
+  }
+}
+
+/* ***************************
+ *  Change Password
+ * ************************** */
+async function updatePassword(req, res, next) {
+  const { account_id, account_password } = req.body
+  let hashedPassword
+  try {
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+    await accountModel.updatePassword(account_id, hashedPassword)
+
+    req.falsh("notice", "Password changed successfully.")
+    res.redirect("/account/")
+  } catch(error) {
+    console.error("updatePassword error:", error)
+    req.flash("notice", "Password update failed. Please try again.")
+    res.redirect("/account/updqate/" + account_id)
+  }
+}
+
+/* ***************************
+ *  Logout
+ * ************************** */
+function logout(req, res) {
+  res.clearCookie("jwt")
+  req.flash("notice", "You have been logged out.")
+  return res.redirect("/")
+}
+ 
+module.exports = {
+  buildLogin,
+  buildRegister, 
+  registerAccount, 
+  accountLogin, 
+  buildManagement, 
+  buildUpdateAccount, 
+  updateAccount,
+  updatePassword,
+  logout
+}

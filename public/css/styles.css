@@ -8,6 +8,10 @@
 }
 
 /* Basic */
+select {
+  padding: 5px;
+  width: 20%;
+}
 a {
   text-decoration: none;
   color: black; 
@@ -16,7 +20,28 @@ a {
 ul {
   list-style: none;
 }
+
+.notice {
+  font-size: 20px;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, .1);
+  border-radius: 5px;
+}
+
+.link {
+  font-weight: 600;
+  text-align: center;
+  display: block;
+  width: 20%;
+  margin: 10px 0;
+  background-color: #1591EA;
+  padding: 5px;
+  border-radius: 5px;
+}
 /* Header */
+#tools a {
+  margin: 0 10px;
+}
 #top-header {
   margin: 20px 10px 10px 10px;
   display: flex;
@@ -65,7 +90,6 @@ nav a:hover {
 }
 
 .background {
-  position: relative;
   display: block;
   max-width: 100%;
   height: 400px;
@@ -75,9 +99,6 @@ nav a:hover {
 }
 
 .invitation {
-  position: absolute;
-  top: 50px;
-  left: 0;
   padding: 5px;
   background: rgba(255, 255, 255, .9);
   color: #1591EA;
@@ -219,6 +240,12 @@ nav a:hover {
   cursor: pointer;
 }
 
+.form p {
+  margin: 5px 0;
+  color: #fff;
+  font-size: 20px;
+}
+
 .sign_up {
   font-size: 20px;
 }
@@ -243,7 +270,7 @@ input:required:invalid, input:focus:invalid {
   margin: 10px;
  }
 
-.manag-links a {
+/* .manag-links a {
   margin-top: 20px;
   width: 30%;
   background-color: #ffffff;
@@ -252,7 +279,7 @@ input:required:invalid, input:focus:invalid {
   padding: 5px 0;
   text-transform: uppercase;
   cursor: pointer;
-}
+} */
 
 .inv-table {
   width: 100%;
