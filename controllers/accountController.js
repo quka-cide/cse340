@@ -164,12 +164,12 @@ async function updatePassword(req, res, next) {
     hashedPassword = await bcrypt.hashSync(account_password, 10)
     await accountModel.updatePassword(account_id, hashedPassword)
 
-    req.falsh("notice", "Password changed successfully.")
+    req.flash("notice", "Password changed successfully.")
     res.redirect("/account/")
   } catch(error) {
     console.error("updatePassword error:", error)
     req.flash("notice", "Password update failed. Please try again.")
-    res.redirect("/account/updqate/" + account_id)
+    res.redirect("/account/update/" + account_id)
   }
 }
 
