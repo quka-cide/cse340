@@ -7,7 +7,7 @@ async function getClassifications(){
   return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
 }
 
-module.exports = { getClassifications }
+
 
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
@@ -154,4 +154,61 @@ async function updateInventory(
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getDetailByInventoryId, addClassification, addInventory, updateInventory, deleteInventoryItem};
+/* ***************************
+ *  Advanced Filter Inventory
+ * ************************** */
+async function filterInventory({ minPrice, maxPrice, classification_id, minYear, maxYear, name }) {
+  try {
+    let query = `SELECT * FROM public.inventory AS i
+                 JOIN public.classification AS c 
+                 ON i.classification_id = c.classification_id
+                 WHERE 1=1`;
+    const params = [];
+    let i = 1;
+
+    if (minPrice) {
+      query += ` AND i.inv_price >= $${i++}`;
+      params.push(minPrice);
+    }
+    if (maxPrice) {
+      query += ` AND i.inv_price <= $${i++}`;
+      params.push(maxPrice);
+    }
+    if (classification_id) {
+      query += ` AND i.classification_id = $${i++}`;
+      params.push(classification_id);
+    }
+    if (minYear) {
+      query += ` AND i.inv_year >= $${i++}`;
+      params.push(minYear);
+    }
+    if (maxYear) {
+      query += ` AND i.inv_year <= $${i++}`;
+      params.push(maxYear);
+    }
+    if (name) {
+      query += ` AND (i.inv_make ILIKE $${i} OR i.inv_model ILIKE $${i})`;
+      params.push(`%${name}%`);
+      i++;
+    }
+
+    query += ` ORDER BY i.inv_price ASC`;
+
+    const data = await pool.query(query, params);
+    return data.rows;
+  } catch (error) {
+    console.error("filterInventory error: " + error);
+    throw error;
+  }
+}
+
+module.exports = {
+  getClassifications, 
+  getInventoryByClassificationId, 
+  getDetailByInventoryId, 
+  addClassification, 
+  addInventory, 
+  updateInventory, 
+  deleteInventoryItem,
+  filterInventory
+};

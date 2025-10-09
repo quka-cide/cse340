@@ -103,7 +103,7 @@ invCont.buildAddInventory = async function(req, res, next) {
 
 invCont.addInventory = async function (req, res, next) {
   try {
-    const nav = await utilities.getNav()
+    let nav = await utilities.getNav()
 
     const errors = validationResult(req)
 
@@ -306,5 +306,34 @@ invCont.deleteInventory = async function (req, res, next) {
     })
   }
 }
+
+invCont.filter = async (req, res) => {
+  try {
+    const { minPrice, maxPrice, classification_id, minYear, maxYear, name } = req.query;
+
+    const items = await invModel.filterInventory({
+      minPrice,
+      maxPrice,
+      classification_id,
+      minYear,
+      maxYear,
+      name
+    });
+
+    const classifications = await invModel.getClassifications();
+    const grid = await utilities.buildClassificationGrid(items)
+    let nav = await utilities.getNav()
+    res.render("inventory/filterResults", {
+      title: "Filter Inventory",
+      nav,
+      grid,
+      filters: req.query,
+      classifications
+    });
+  } catch (error) {
+    console.error("Error in filter controller:", error);
+    res.status(500).send("Error fetching filtered inventory");
+  }
+};
 
 module.exports = invCont

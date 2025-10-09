@@ -11,6 +11,7 @@ Util.getNav = async function (req, res, next) {
   console.log("DEBUG classifications:", data.rows)
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
+  list += '<li><a href="/inv/filter" title="Filter Inventory">Filter</a></li>'
   data.rows.forEach((row) => {
     list += "<li>"
     list +=
@@ -31,7 +32,7 @@ Util.getNav = async function (req, res, next) {
 * Build the classification view HTML
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
-  let grid
+  let grid = ""
   if(data.length > 0){
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => { 

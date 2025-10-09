@@ -1,0 +1,29 @@
+<form method="get" action="/inv/filter" class="filter-form form">
+  <label>Min Price:</label>
+  <input type="number" name="minPrice" value="<%= filters.minPrice || '' %>">
+  <label>Max Price:</label>
+  <input type="number" name="maxPrice" value="<%= filters.maxPrice || '' %>">
+
+<label>Classification: </label>
+  <select name="classification_id">
+    <option value="">All</option>
+    <% classifications.rows.forEach(c => { %>
+      <option value="<%= c.classification_id %>" <%= filters.classification_id == c.classification_id ? 'selected' : '' %>>
+        <%= c.classification_name %>
+      </option>
+    <% }) %>
+  </select>
+
+
+  <label>Min Year:</label>
+  <input type="number" name="minYear" value="<%= filters.minYear || '' %>">
+  <label>Max Year:</label>
+  <input type="number" name="maxYear" value="<%= filters.maxYear || '' %>">
+  <label>Name:</label>
+  <input type="text" name="name" value="<%= filters.name || '' %>">
+
+  <button type="submit">Filter</button>
+</form>
+
+<h2>Filtered Inventory</h2>
+<%- grid %>

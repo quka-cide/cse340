@@ -36,4 +36,7 @@ router.post("/update/", utilities.checkAccountType, invController.updateInventor
 router.get("/delete/:inv_id", utilities.checkAccountType, invController.deleteInventoryView)
 router.post("/delete/", utilities.checkAccountType, invController.deleteInventory)
 
+//filter
+router.get("/filter", invController.filter);
+
 module.exports = router;
